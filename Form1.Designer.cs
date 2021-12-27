@@ -29,9 +29,11 @@ namespace Лабораторная_работа__5
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.txtLog = new System.Windows.Forms.RichTextBox();
             this.labelScore = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,6 +45,13 @@ namespace Лабораторная_работа__5
             this.pbMain.TabIndex = 0;
             this.pbMain.TabStop = false;
             this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pbMain_Paint);
+            this.pbMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbMain_MouseClick);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 30;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // txtLog
             // 
@@ -82,6 +91,7 @@ namespace Лабораторная_работа__5
         private System.Windows.Forms.PictureBox pbMain;
         private System.Windows.Forms.RichTextBox txtLog;
         private System.Windows.Forms.Label labelScore;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
