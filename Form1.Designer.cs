@@ -29,34 +29,59 @@ namespace Лабораторная_работа__5
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pbMain = new System.Windows.Forms.PictureBox();
+            this.txtLog = new System.Windows.Forms.RichTextBox();
+            this.labelScore = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // pbMain
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(537, 394);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pbMain.Location = new System.Drawing.Point(12, 12);
+            this.pbMain.Name = "pbMain";
+            this.pbMain.Size = new System.Drawing.Size(537, 394);
+            this.pbMain.TabIndex = 0;
+            this.pbMain.TabStop = false;
+            this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pbMain_Paint);
+            // 
+            // txtLog
+            // 
+            this.txtLog.Location = new System.Drawing.Point(568, 12);
+            this.txtLog.Name = "txtLog";
+            this.txtLog.Size = new System.Drawing.Size(203, 394);
+            this.txtLog.TabIndex = 1;
+            this.txtLog.Text = "";
+            // 
+            // labelScore
+            // 
+            this.labelScore.AutoSize = true;
+            this.labelScore.Location = new System.Drawing.Point(13, 12);
+            this.labelScore.Name = "labelScore";
+            this.labelScore.Size = new System.Drawing.Size(48, 15);
+            this.labelScore.TabIndex = 2;
+            this.labelScore.Text = "Очки: 0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.labelScore);
+            this.Controls.Add(this.txtLog);
+            this.Controls.Add(this.pbMain);
             this.Name = "Form1";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Text = "Лабораторная работа №5";
+            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbMain;
+        private System.Windows.Forms.RichTextBox txtLog;
+        private System.Windows.Forms.Label labelScore;
     }
 }
 
