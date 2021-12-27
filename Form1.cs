@@ -55,6 +55,8 @@ namespace Лабораторная_работа__5
             Graphics g = e.Graphics; // вытаскиваем объект графики из события
             g.Clear(Color.White); // заливаем фон белым цветом
 
+            updatePlayer(); // вызываем метод для более плавного движения игрока
+
             // пересчитываем пересечения
             foreach (BaseObject obj in objects.ToList()) // objects.ToList() создает копию списка и позволяет
                                                          // модифицировать оригинальный objects прямо из цикла foreach
@@ -74,7 +76,8 @@ namespace Лабораторная_работа__5
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        // метод для более плавного движения игрока
+        private void updatePlayer()
         {
             // если marker не нулевой
             if (marker != null)
@@ -88,11 +91,30 @@ namespace Лабораторная_работа__5
                 dx /= length; // нормализуем координаты
                 dy /= length;
 
-                // пересчитываем координаты игрока
-                player.X += dx * 2;
-                player.Y += dy * 2;
+                // используем вектор dx, dy
+                // как вектор ускорения, точнее вектор притяжения,
+                // который притягивает игрока к маркеру
+                player.vX += dx * 0.5f;
+                player.vY += dy * 0.5f;
+
+                // расчитываем угол поворота игрока 
+                player.Angle = (float)(90 - Math.Atan2(player.vX, player.vY) * 180 / Math.PI);
             }
 
+            // тормозящий момент, нужен чтобы, когда игрок
+            // достигнет маркера произошло постепенное замедление
+            player.vX += -player.vX * 0.1f;
+            player.vY += -player.vY * 0.1f;
+
+            // пересчет позиция игрока с помощью вектора скорости
+            player.X += player.vX;
+            player.Y += player.vY;
+        }
+
+        // метод, вызвающийся через некоторый промежуток времени и пересчитывающий
+        // позицию объектов в соответствии с задуманной логикой
+        private void timer1_Tick(object sender, EventArgs e)
+        {
             // запрашиваем обновление pbMain
             // это вызовет метод pbMain_Paint по новой
             pbMain.Invalidate();
