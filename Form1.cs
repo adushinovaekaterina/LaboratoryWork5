@@ -15,10 +15,16 @@ namespace Лабораторная_работа__5
     public partial class Form1 : Form
     {
         MyRectangle myRect; // поле под наш прямоугольник
+        List<BaseObject> objects = new List<BaseObject>(); // список объектов
         public Form1()
         {
             InitializeComponent();
-            myRect = new MyRectangle(100, 100, 45); // создаем экземпляр класса
+
+            // положим в список объектов два прямоугольника
+            objects.Add(new MyRectangle(50, 50, 0));
+            objects.Add(new MyRectangle(100, 100, 45));
+
+            //myRect = new MyRectangle(100, 100, 45); // создаем экземпляр класса
         }
         // событие срабатывает, когда происходит отрисовка формы,
         // как правило в момент появления формы на экране
@@ -32,12 +38,20 @@ namespace Лабораторная_работа__5
             Graphics g = e.Graphics; // вытаскиваем объект графики из события
             g.Clear(Color.White); // заливаем фон белым цветом
 
-            g.Transform = myRect.GetTransform(); // вызываем метод класса BaseObject,
-                                                 // (от которого наследован класс MyRectangle)
-                                                 // для формирования матрицы трансформаций
+            // выводим объекты, теперь если захочется добавлять еще объекты,
+            // нужно прописать их в конструкторе
+            foreach (var obj in objects)
+            {
+                g.Transform = obj.GetTransform();
+                obj.Render(g);
+            }
+
+            //g.Transform = myRect.GetTransform(); // вызываем метод класса BaseObject,
+            // (от которого наследован класс MyRectangle)
+            // для формирования матрицы трансформаций
 
 
-            myRect.Render(g); // теперь так рисуем (рендерим)            
+            //myRect.Render(g); // теперь так рисуем (рендерим)            
         }
     }
 }
