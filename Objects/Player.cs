@@ -12,7 +12,7 @@ namespace Лабораторная_работа__5.Objects
     {
         // поле делегат, к которому можно будет привязать реакцию на события
         public Action<Marker> OnMarkerOverlap;
-        public Action<GreenCircle>? OnGreenCircleOverlap;
+        public Action<GreenCircle> OnGreenCircleOverlap;
 
         // чтобы сделать движение игрока более плавным, надо чтобы
         // пересчет его направление происходил через ускорение

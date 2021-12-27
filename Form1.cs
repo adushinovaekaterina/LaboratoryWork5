@@ -16,7 +16,7 @@ namespace Лабораторная_работа__5
     {
         List<BaseObject> objects = new List<BaseObject>(); // список объектов
         Player player; // поле под игрока
-        Marker? marker; // поле под точку, в которую двигается игрок
+        Marker marker; // поле под точку, в которую двигается игрок
         GreenCircle[] greenCircles;
         public Form1()
         {
@@ -47,6 +47,7 @@ namespace Лабораторная_работа__5
             {
                 player.score++;
                 c.SetRandomPoint(pbMain.Width, pbMain.Height);
+                c.Timer = 100;
             };
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0); // создаем экземпляр класса точки, в которую двигается игрок
 
@@ -82,6 +83,22 @@ namespace Лабораторная_работа__5
             foreach (var obj in objects)
             {
                 g.Transform = obj.GetTransform();
+                if (obj is GreenCircle)
+                {
+                    var circle = (GreenCircle)obj;
+                    circle.Timer--;
+                    if (circle.Timer == 0)
+                    {
+                        circle.SetRandomPoint(pbMain.Width, pbMain.Height);
+                        circle.Timer = 100;
+                    }
+                    g.DrawString(
+                        circle.Timer.ToString(),
+                        new Font("Verdana", 8),
+                        new SolidBrush(Color.Green),
+                        10, 10
+                    );
+                }
                 obj.Render(g);
             }
             labelScore.Text = $"Счёт: {player.score}";
