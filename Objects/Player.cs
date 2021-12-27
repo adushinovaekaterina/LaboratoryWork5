@@ -12,15 +12,19 @@ namespace Лабораторная_работа__5.Objects
     {
         // поле делегат, к которому можно будет привязать реакцию на события
         public Action<Marker> OnMarkerOverlap;
+        public Action<GreenCircle>? OnGreenCircleOverlap;
 
         // чтобы сделать движение игрока более плавным, надо чтобы
         // пересчет его направление происходил через ускорение
         public float vX, vY; // поля под вектор скорости для плавного движение игрока
+        public int score = 0; // очки
+
         // конструктор
         public Player(float x, float y, float angle) : base(x, y, angle)
         {
 
         }
+        // отрисовка объекта
         public override void Render(Graphics g)
         {
             // рисуем кружочек с синим фоном
@@ -41,9 +45,7 @@ namespace Лабораторная_работа__5.Objects
             g.DrawLine(new Pen(Color.Black, 2), 0, 0, 25, 0);
         }
 
-        // задание формы 
-        // в форму добавляем круг, совпадающий по размерам с кругом,
-        // который выводили в Render
+        // получение пути объекту
         public override GraphicsPath GetGraphicsPath()
         {
             GraphicsPath path = base.GetGraphicsPath();
@@ -53,6 +55,8 @@ namespace Лабораторная_работа__5.Objects
 
         // создавая поле делегат, надо создать метод,
         // с помощью которого будет вызываться это событие
+
+        // пересечение с объектами
         public override void Overlap(BaseObject obj)
         {
             base.Overlap(obj);
@@ -60,6 +64,11 @@ namespace Лабораторная_работа__5.Objects
             if (obj is Marker)
             {
                 OnMarkerOverlap(obj as Marker);
+            }
+
+            if (obj is GreenCircle)
+            {
+                OnGreenCircleOverlap?.Invoke((GreenCircle)obj);
             }
         }
     }

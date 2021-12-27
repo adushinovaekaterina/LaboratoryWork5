@@ -16,10 +16,19 @@ namespace Лабораторная_работа__5
     {
         List<BaseObject> objects = new List<BaseObject>(); // список объектов
         Player player; // поле под игрока
-        Marker marker; // поле под точку, в которую двигается игрок
+        Marker? marker; // поле под точку, в которую двигается игрок
+        GreenCircle[] greenCircles;
         public Form1()
         {
             InitializeComponent();
+
+            greenCircles = new GreenCircle[2];
+            for (int i = 0; i < greenCircles.Length; i++)
+            {
+                greenCircles[i] = new GreenCircle(0, 0, 0);
+                greenCircles[i].SetRandomPoint(pbMain.Width, pbMain.Height);
+                objects.Add(greenCircles[i]);
+            }
 
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0); // создаем экземпляр класса игрока в центре экрана
             // реакция на пересечение
@@ -34,14 +43,15 @@ namespace Лабораторная_работа__5
                 marker = null;
             };
 
+            player.OnGreenCircleOverlap += (c) =>
+            {
+                player.score++;
+                c.SetRandomPoint(pbMain.Width, pbMain.Height);
+            };
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0); // создаем экземпляр класса точки, в которую двигается игрок
 
             objects.Add(marker); // добавляем в список объектов точку, в которую двигается игрок
             objects.Add(player); // добавляем в список объектов игрока
-
-            // добавляем в список объектов два прямоугольника
-            objects.Add(new MyRectangle(50, 50, 0));
-            objects.Add(new MyRectangle(100, 100, 45));
         }
         // событие срабатывает, когда происходит отрисовка формы,
         // как правило в момент появления формы на экране
@@ -74,6 +84,7 @@ namespace Лабораторная_работа__5
                 g.Transform = obj.GetTransform();
                 obj.Render(g);
             }
+            labelScore.Text = $"Счёт: {player.score}";
         }
 
         // метод для более плавного движения игрока

@@ -15,6 +15,8 @@ namespace Лабораторная_работа__5.Objects
         public float Y; // и Y
         public float Angle; // и угол поворота
 
+        public Random Random = new Random();
+
         // поле делегат, к которому можно будет привязать реакцию на события
         public Action<BaseObject, BaseObject> OnOverlap;
 
@@ -42,6 +44,13 @@ namespace Лабораторная_работа__5.Objects
         public virtual void Render(Graphics g)
         {
 
+        }
+
+        // установка случайной позиции
+        public virtual void SetRandomPoint(int xMax, int yMax)
+        {
+            X = Random.Next(20, xMax - 20);
+            Y = Random.Next(20, yMax - 20);
         }
 
         public virtual GraphicsPath GetGraphicsPath()
