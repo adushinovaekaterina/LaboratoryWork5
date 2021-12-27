@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,15 @@ namespace Лабораторная_работа__5.Objects
             X = x;
             Y = y;
             Angle = angle;
+        }
+        // метод для формирования матрицы трансформаций
+        public Matrix GetTransform()
+        {
+            Matrix matrix = new Matrix();
+            matrix.Translate(X, Y);
+            matrix.Rotate(Angle);
+
+            return matrix;
         }
 
         // ключевое слово virtual нужно, чтобы метод можно

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Лабораторная_работа__5
         public Form1()
         {
             InitializeComponent();
-            myRect = new MyRectangle(0, 0, 0); // создаем экземпляр класса
+            myRect = new MyRectangle(100, 100, 45); // создаем экземпляр класса
         }
         // событие срабатывает, когда происходит отрисовка формы,
         // как правило в момент появления формы на экране
@@ -30,7 +31,13 @@ namespace Лабораторная_работа__5
         {
             Graphics g = e.Graphics; // вытаскиваем объект графики из события
             g.Clear(Color.White); // заливаем фон белым цветом
-            myRect.Render(g); // теперь так рисуем            
+
+            g.Transform = myRect.GetTransform(); // вызываем метод класса BaseObject,
+                                                 // (от которого наследован класс MyRectangle)
+                                                 // для формирования матрицы трансформаций
+
+
+            myRect.Render(g); // теперь так рисуем (рендерим)            
         }
     }
 }

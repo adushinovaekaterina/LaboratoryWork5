@@ -20,9 +20,9 @@ namespace Лабораторная_работа__5.Objects
         // переопределяем Render
         public override void Render(Graphics g)
         {
-            // перенесли код из формы
-            g.FillRectangle(new SolidBrush(Color.Yellow), 0, 0, 50, 30); // заливаем цвет (сначала фон)
-            g.DrawRectangle(new Pen(Color.Red, 2), 0, 0, 50, 30); // рисуем прямоугольную рамку (потом рамка)
+            // сместим влево-вверх на половину ширины и высоты, чтобы центр был смещен в центр объекта 
+            g.FillRectangle(new SolidBrush(Color.Yellow), -25, -15, 50, 30); // заливаем цвет (сначала фон)
+            g.DrawRectangle(new Pen(Color.Red, 2), -25, -15, 50, 30); // рисуем прямоугольную рамку (потом рамка)
         }
     }
 }
